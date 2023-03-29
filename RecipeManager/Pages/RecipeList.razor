@@ -1,0 +1,50 @@
+﻿@page "/recipes"
+
+@using DataAccess.Models;
+@using Services;
+
+@inject IRecipeService RecipeService
+
+<h3>Recipes</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Date Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Recipes.Any())
+        {
+            <tr>
+                <th scope="row" colspan="5">No recipes available</th>
+            </tr>
+        }
+        else
+        {
+            @foreach (var recipe in Recipes)
+            {
+                <tr>
+                    <th scope="row">@recipe.Id</th>
+                    <td>@recipe.Title</td>
+                    <td>@recipe.Description.Substring(0, 50) ...</td>
+                    <td>@recipe.DateCreated</td>
+                    <td>@recipe.DateUpdated</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    List<Recipe> Recipes = new List<Recipe>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Recipes = RecipeService.List();
+    }
+}

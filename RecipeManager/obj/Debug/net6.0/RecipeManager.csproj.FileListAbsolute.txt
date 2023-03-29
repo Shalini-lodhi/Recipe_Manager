@@ -42,7 +42,6 @@ C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\Rec
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Drawing.Common.dll
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Memory.Data.dll
-C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Net.Http.Json.dll
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Runtime.Caching.dll
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.Security.Permissions.dll

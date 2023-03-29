@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "dLkleBXefJoG4+0yI49qbPHDT/yD0w2yB4/0uHNV/Y5tOslk7qkfqW8NUnPXfhHbPL7/jr/QXhMJSrxttYAK3Q==",
+  "dgSpecHash": "20/ySDFUQ6Y5L1RcHWGyt5Jl/hbqCBoglVRKWlSks5IZaO3eWp4s6gk0Rg6a/Even5nEXRZKlW/v7KmOUuHKig==",
   "success": true,
   "projectFilePath": "C:\\Users\\X6SLODHI\\Documents\\Training_codes\\Blazor\\RecipeManager_BlazorServer\\RecipeManager\\RecipeManager.csproj",
   "expectedPackageFiles": [
@@ -53,7 +53,6 @@
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.io\\4.3.0\\system.io.4.3.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
-    "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.net.http.json\\7.0.1\\system.net.http.json.7.0.1.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.reflection\\4.3.0\\system.reflection.4.3.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.reflection.primitives\\4.3.0\\system.reflection.primitives.4.3.0.nupkg.sha512",
@@ -69,7 +68,7 @@
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.text.encoding.codepages\\5.0.0\\system.text.encoding.codepages.5.0.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
-    "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
+    "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.text.json\\7.0.0\\system.text.json.7.0.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"

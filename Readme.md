@@ -1,99 +1,170 @@
+
 # Recipe Manager
+Created a recipe manager web application that can be used as a starter template for some of our personal projects, or enhance our portfolio to increase your chances of getting into a better job!
 
-## Setting up project with database
-- Setup the project
-- Add Database Project
-- Setup appsettings.json
-- Install dependencies
-- Setup the Database Context
-- Setup the Startup class
-- Create the Recipe Model
-- Create and run the initial migration
+## Setting Up the Service and UI
+- Project cleanup
+- Add a new Razor Component
+- Add thr Recipes Services and Interface
+- Mock a recipe list from service
+- Access the mock list on initiatized
+- Show the recipes with in the table
 
-1. Add Class Library for Data Access (**DataAccess**)
+1. Project Clean up
+- Remove Unwanted files like: Counter.razor, _layout.cshtml, weather_forcast.razor etc.
+- Remove HTTP client dependency from Startup.cs and it's package
 
-2. Set up connection string in **appsettings.json**
-```json
-{
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=.;Database=RecipeManager;Trusted_Connection=True"
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning",
-      "Microsoft.Hosting.Lifetime": "Information"
-    }
-  },
-  "AllowedHosts": "*"
+2. Add new Razor Component **Pages/RecipesList.razor**
+```html
+@page "/recipes"
+
+<h3>RecipeList</h3>
+
+@code {
+
 }
 ```
-3. Setup Files and Folder
-- Add **Data** and **Model** to the DataAccess Library folder
-    - Data Folder : contains application DB-context
-    - ApplicationDbContext.cs
-Model Folder : Entity/Database (Recipe models)
-4. Install Dependencies
-- Microsoft.EntityFrameworkCore.SqlServer
-- Microsoft.EntityFrameworkCore
-- Microsoft.EntityFrameworkCore.Tools
-- System.Net.Http.Json (Help to get JSON data)
-5. Setup ```ApplicationDbContext.cs```
-```c#
-using Microsoft.EntityFrameworkCore;
+- Adding new nav bar component to **Shared/NavMenu.razor**
+```html
+<div class="nav-item px-3">
+            <NavLink class="nav-link" href="recipes">
+                <span class="oi oi-home" aria-hidden="true"></span> Recipes
+            </NavLink>
+</div>
+```
+3. Adding a basic bootstrap table
+```html
+@page "/recipes"
 
-namespace DataAccess.Data
+@using DataAccess.Models;
+
+<h3>Recipes</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date Created</th>
+            <th scope="col">Date Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+@code {
+}
+```
+
+4. Adding Recipes Services and Interface
+- Performing CRUD operation through interface ```Services/IRecipeService.cs``` and Implementing interface in ```Services/RecipeService.cs```
+```c#
+using DataAccess.Models;
+
+namespace RecipeManager.Services
 {
-    public class ApplicationDbContext : DbContext
+    public interface IRecipeService
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {}
-         public DbSet<Recipe> Recipes { get; set; }
+        //Create
+        Recipe Create(Recipe recipe);
+        //Get
+        Recipe Get(int id);
+        //List
+        List<Recipe> List();
+        //Update
+        Recipe Update(Recipe recipe);
+        //Delete
+        void Delete(int id);
     }
 }
 ```
-6. Setup ```Startup.cs``
-- Add HTTP client in ConfigureServices
-- Add Database Connection String to ConfigurationService
+- Add scope of service in Startup class
 ```c#
-public void ConfigureServices(IServiceCollection services)
+ public void ConfigureServices(IServiceCollection services)
         {
-            services.AddHttpClient();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
+            services.AddScoped<IRecipeService, RecipeService>();
         }
 ```
-7. Create **Recipe Model** - ```Recipe.cs```
+- Accessing it in ```RecipeList.razor```
+```css
+@using DataAccess.Models;
+@using Services;
+
+@inject IRecipeService RecipeService
+```
+
+5. Mock a recipe list from service in ```Services/RecipeService.cs```
 ```c#
-namespace DataAccess.Models
-{
-    public class Recipe
+public List<Recipe> List()
+        {
+            var recipes = new List<Recipe>
+            {
+                new Recipe
+                {
+                    Id = 1,
+                    Title = "Burger",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                    DateCreated = DateTime.Now.AddDays(-2),
+                    DateUpdated = DateTime.Now.AddDays(-1)
+                },
+                new Recipe
+                {
+                    Id = 2,
+                    Title = "Pizza",
+                    Description = "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.",
+                    DateCreated = DateTime.Now.AddDays(-4),
+                    DateUpdated = DateTime.Now.AddDays(-3)
+                },
+                new Recipe
+                {
+                    Id = 3,
+                    Title = "Lasagne",
+                    Description = "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.",
+                    DateCreated = DateTime.Now.AddDays(-6),
+                    DateUpdated = DateTime.Now.AddDays(-5)
+                },
+            };
+
+            return recipes;
+        }
+```
+6. Access the mock list on initiatized ```RecipeList.razor```
+```css
+@code {
+    List<Recipe> Recipes = new List<Recipe>();
+
+    protected override async Task OnInitializedAsync()
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime DataCreated { get; set; }
-        public DateTime DataUpated { get; set; }
+        Recipes = RecipeService.List();
     }
 }
 ```
-8. Create Initial Migration
-In *Package Manager Console*, set Default Project as **DataAccess**. 
-Run ```Add-Migration InitialCreate```; for adding entity model to (RecipeManager)database to create Table (Recipes) , through *Migrations*. 
-Run ```Update-Database``` for updating databse if the same table exits.
-
-    This will create the requires table in the database for us; with same fields as table columns.
-    
-```sql
-    CREATE TABLE [dbo].[Recipes] (
-    [Id]          INT            IDENTITY (1, 1) NOT NULL,
-    [Title]       NVARCHAR (MAX) NOT NULL,
-    [Description] NVARCHAR (MAX) NOT NULL,
-    [DateCreated] DATETIME2 (7)  NOT NULL,
-    [DateUpated]  DATETIME2 (7)  NOT NULL,
-    CONSTRAINT [PK_Recipes] PRIMARY KEY CLUSTERED ([Id] ASC)
-    );
+7. Show the recipes with in the table  ```RecipeList.razor```
+```html
+<tbody>
+        @if (!Recipes.Any())
+        {
+            <tr>
+                <th scope="row" colspan="5">No recipes available</th>
+            </tr>
+        }
+        else
+        {
+            @foreach (var recipe in Recipes)
+            {
+                <tr>
+                    <th scope="row">@recipe.Id</th>
+                    <td>@recipe.Title</td>
+                    <td>@recipe.Description.Substring(0, 50) ...</td>
+                    <td>@recipe.DateCreated</td>
+                    <td>@recipe.DateUpdated</td>
+                </tr>
+            }
+        }
+</tbody>
 ```
-

@@ -6,6 +6,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
-        public DateTime DateUpated { get; set; }
+        public DateTime DateUpdated { get; set; }
     }
 }

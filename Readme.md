@@ -1,4 +1,6 @@
+
 # Recipe Manager
+Created a recipe manager web application that can be used as a starter template for some of our personal projects or enhance our portfolio. Using **Blazor Server** in ASP.NET Core (C#), Entity Framework Core and SQL Server database. 
 
 ## Setting up project with database
 - Setup the project

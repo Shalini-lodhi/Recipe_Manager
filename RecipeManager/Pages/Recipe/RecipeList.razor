@@ -4,8 +4,9 @@
 @using Services;
 
 @inject IRecipeService RecipeService
+@inject NavigationManager NavigationManager
 
-<h3>Recipes</h3>
+<h3>Recipes List</h3>
 
 <table class="table table-striped">
     <thead>
@@ -26,9 +27,9 @@
         }
         else
         {
-            @foreach (var recipe in Recipes)
+            foreach (var recipe in Recipes)
             {
-                <tr>
+                <tr @onclick="() => RedirectTo(recipe.Id)">
                     <th scope="row">@recipe.Id</th>
                     <td>@recipe.Title</td>
                     <td>@recipe.Description.Substring(0, 50) ...</td>
@@ -46,5 +47,10 @@
     protected override async Task OnInitializedAsync()
     {
         Recipes = RecipeService.List();
+    }
+
+    private void RedirectTo(int recipeId)
+    {
+        NavigationManager.NavigateTo("/");
     }
 }

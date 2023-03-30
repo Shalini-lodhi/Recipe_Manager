@@ -24,6 +24,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/X6SLODHI/Documents/Training_codes/Blazor/RecipeManager_BlazorServer/RecipeManager/Pages/Recipe/RecipeDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVjaXBlXFJlY2lwZURldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/X6SLODHI/Documents/Training_codes/Blazor/RecipeManager_BlazorServer/RecipeManager/Pages/Recipe/RecipeList.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUmVjaXBlXFJlY2lwZUxpc3QucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 

@@ -2,52 +2,84 @@
 # Recipe Manager
 Created a recipe manager web application that can be used as a starter template for some of our personal projects, or enhance our portfolio to increase your chances of getting into a better job!
 
-## Setting Up the Service and UI
-- Insert recipes into SqlServer Database
-- Add a Recipe page folder
-- Access Database Recipes
-– Setup NavigationManager
+## Retrieve Data using EntityFramework Core
+- Create a new Recipe Details Razor Component
+- Get a recipe by its ID(Recipe Service)
+- Show the Recipe Details on page load
+- Redirect to a recipe when seleted
 
-1. Insert recipes into SqlServer Database
+### 1. Create a new Recipe Details Razor Component
 
-- Adding data to the database using *Migration*. Write migration code in **Package Manager Console**:
-```Add-Migration RecipesInsert```
-
-In ```RecipeInsert.cs``` update
+```Pages/Recipe/RecipeDetails.razor```
 ```c#
-protected override void Up(MigrationBuilder migrationBuilder)
-        {
-            migrationBuilder.Sql(@"
-SET IDENTITY_INSERT Recipes ON;
-INSERT INTO Recipes
-	(   Id, Title,		[Description],																																																DateCreated,				DateUpdated)
-(SELECT	1, 'Burger',	'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',																				'2021-09-04 12:03:00.000', '2021-09-05 18:30:00.000' WHERE NOT EXISTS (SELECT 1 FROM Recipes WHERE Id = 1)) UNION ALL
-(SELECT	2, 'Pizza',		'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',												'2021-09-02 14:58:00.000', '2021-09-03 08:12:00.000' WHERE NOT EXISTS (SELECT 1 FROM Recipes WHERE Id = 2)) UNION ALL
-(SELECT	3, 'Lasagne',	'Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.',		'2021-08-31 11:39:00.000', '2021-09-01 09:40:00.000' WHERE NOT EXISTS (SELECT 1 FROM Recipes WHERE Id = 3));
-SET IDENTITY_INSERT Recipes OFF;
-");
+@page "/recipe/{Id:int}"
 
+@using DataAccess.Models
+@using Services
+
+@inject IRecipeService RecipeService
+
+<h3>@Recipe.Title</h3>
+<b>Description:</b><p>@Recipe.Description</p>
+<b>Date created:</b><p>@Recipe.DateCreated</p>
+<b>Date updated:</b><p>@Recipe.DateUpdated</p>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    public Recipe Recipe = new Recipe();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            Recipe = RecipeService.Get(Id.Value);
+        }
+    }
+}
+```
+### 2. Geta Recipe By its Id(Recipe Service)
+```RecipeService.cs```
+```c#
+ public Recipe Get(int id)
+        {
+            return _db.Recipes.Find(id);
         }
 ```
-
-2. Add a Recipe Page Folder
-Create Recipe folder under Pages and shift **RecipeList.razor** to it
-
-3. Access Database Recipes
-In **RescipeService.cs**
-
+### 3. Show the Recipr Details on Page Load
+```RecipeDetails.razor```
 ```c#
-private readonly ApplicationDbContext _db;
+@page "/recipe/{Id:int}"
 
-        public RecipeService(ApplicationDbContext db)
+@using DataAccess.Models
+@using Services
+
+@inject IRecipeService RecipeService
+
+<h3>@Recipe.Title</h3>
+<b>Description:</b><p>@Recipe.Description</p>
+<b>Date created:</b><p>@Recipe.DateCreated</p>
+<b>Date updated:</b><p>@Recipe.DateUpdated</p>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    public Recipe Recipe = new Recipe();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
         {
-            _db = db;
+            Recipe = RecipeService.Get(Id.Value);
         }
+    }
+}
 ```
-
-4. Setup Navigation Manager
-**RecipeList.razor**
+### 4. Redirect to a recipe when selected
+```RecipeList.razor```
 ```c#
+@inject IRecipeService RecipeService
+@inject NavigationManager NavigationManager
 @code {
     List<Recipe> Recipes = new List<Recipe>();
 
@@ -58,7 +90,7 @@ private readonly ApplicationDbContext _db;
 
     private void RedirectTo(int recipeId)
     {
-        NavigationManager.NavigateTo("/");
+        NavigationManager.NavigateTo($"/recipe/{recipeId}");
     }
 }
 ```

@@ -1,0 +1,25 @@
+﻿@page "/recipe/{Id:int}"
+
+@using DataAccess.Models
+@using Services
+
+@inject IRecipeService RecipeService
+
+<h3>@Recipe.Title</h3>
+<b>Description:</b><p>@Recipe.Description</p>
+<b>Date created:</b><p>@Recipe.DateCreated</p>
+<b>Date updated:</b><p>@Recipe.DateUpdated</p>
+
+@code {
+    [Parameter]
+    public int? Id { get; set; }
+    public Recipe Recipe = new Recipe();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != null)
+        {
+            Recipe = RecipeService.Get(Id.Value);
+        }
+    }
+}

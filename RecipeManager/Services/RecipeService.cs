@@ -24,12 +24,12 @@ namespace RecipeManager.Services
 
         public Recipe Get(int id)
         {
-            throw new NotImplementedException();
+            return _db.Recipes.Find(id);
         }
 
         public List<Recipe> List()
         {
-            return  _db.Recipes.ToList();
+            return _db.Recipes.ToList();
         }
 
         public Recipe Update(Recipe recipe)

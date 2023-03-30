@@ -7,13 +7,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <title>RecipeManager</title>
     <base href="~/" />
     <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
     <link href="css/site.css" rel="stylesheet" />
     <link href="RecipeManager.styles.css" rel="stylesheet" />
-    <component type="typeof(App)" render-mode="ServerPrerendered" />
 </head>
 <body>
+    <component type="typeof(App)" render-mode="ServerPrerendered" />
     @RenderBody()
     <div id="blazor-error-ui">
         <environment include="Staging,Production">
@@ -26,6 +27,6 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.server.js"></script>
+    <script src="~/_framework/blazor.server.js"></script>
 </body>
 </html>

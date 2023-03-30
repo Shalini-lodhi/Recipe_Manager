@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "YVSif3v+xUFoZeOe3n3Dgv39Uw1Ns6e1N0i+Sn3jq2w=",
+  "Hash": "VnFZ8Zju5V+j0OXElYBVmsmupvthEbo3FyHNoTotIIk=",
   "Source": "RecipeManager",
   "BasePath": "_content/RecipeManager",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\X6SLODHI\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\Blazored.Toast.bundle.scp.css",
+      "SourceId": "Blazored.Toast",
+      "SourceType": "Package",
+      "ContentRoot": "C:\\Users\\X6SLODHI\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\",
+      "BasePath": "_content/Blazored.Toast",
+      "RelativePath": "Blazored.Toast.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "C:\\Users\\X6SLODHI\\.nuget\\packages\\blazored.toast\\4.1.0\\staticwebassets\\Blazored.Toast.bundle.scp.css"
+    },
     {
       "Identity": "C:\\Users\\X6SLODHI\\Documents\\Training_codes\\Blazor\\RecipeManager_BlazorServer\\RecipeManager\\obj\\Debug\\net6.0\\scopedcss\\bundle\\RecipeManager.styles.css",
       "SourceId": "RecipeManager",

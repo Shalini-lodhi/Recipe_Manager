@@ -34,7 +34,16 @@ namespace RecipeManager.Services
 
         public Recipe Update(Recipe recipe)
         {
-            throw new NotImplementedException();
+            var dbRecipe = _db.Recipes.Find(recipe.Id);
+
+            if (dbRecipe != null)
+            {
+                dbRecipe = recipe;
+                dbRecipe.DateUpdated = DateTime.Now;
+
+                _db.SaveChanges();
+            }
+            return dbRecipe;
         }
     }
 }

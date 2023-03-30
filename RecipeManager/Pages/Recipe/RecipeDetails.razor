@@ -4,11 +4,32 @@
 @using Services
 
 @inject IRecipeService RecipeService
+@inject IToastService ToastService
 
-<h3>@Recipe.Title</h3>
-<b>Description:</b><p>@Recipe.Description</p>
-<b>Date created:</b><p>@Recipe.DateCreated</p>
-<b>Date updated:</b><p>@Recipe.DateUpdated</p>
+<EditForm Model="@Recipe" OnValidSubmit="@HandleOnValidSubmit" class="col-7 p-0">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <InputText id="title" @bind-Value="@Recipe.Title" class="form-control" placeholder="Green curry..." />
+        <ValidationMessage For="@(() => Recipe.Title)"/>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <InputTextArea id="description" @bind-Value="@Recipe.Description" class="form-control" placeholder="Cook the potatoes in boiling water for about 10 mins..." row="5" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    <hr />
+    <label>Created on: @Recipe.DateCreated</label> <br />
+    <label>Updated on: @Recipe.DateUpdated</label>
+</EditForm>
+
+
 
 @code {
     [Parameter]
@@ -20,6 +41,19 @@
         if (Id != null)
         {
             Recipe = RecipeService.Get(Id.Value);
+        }
+    }
+
+    private void HandleOnValidSubmit()
+    {
+        try
+        {
+            RecipeService.Update(Recipe);
+            ToastService.ShowSuccess("Your recipe has been saved successfully");
+        }
+        catch (Exception)
+        {
+            ToastService.ShowError("Something went wrong while saving your recipe");
         }
     }
 }

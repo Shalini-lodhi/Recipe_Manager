@@ -88,3 +88,11 @@ C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\Rec
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\obj\Debug\net6.0\RecipeManager.pdb
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\obj\Debug\net6.0\RecipeManager.genruntimeconfig.cache
 C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\obj\Debug\net6.0\ref\RecipeManager.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Blazored.Toast.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.AspNetCore.Authorization.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.AspNetCore.Components.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Forms.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.AspNetCore.Components.Web.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.AspNetCore.Metadata.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\Microsoft.JSInterop.dll
+C:\Users\X6SLODHI\Documents\Training_codes\Blazor\RecipeManager_BlazorServer\RecipeManager\bin\Debug\net6.0\System.IO.Pipelines.dll

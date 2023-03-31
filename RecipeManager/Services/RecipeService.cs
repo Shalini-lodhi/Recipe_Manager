@@ -25,7 +25,13 @@ namespace RecipeManager.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            var recipe = _db.Recipes.Find(id);
+
+            if (recipe != null)
+            {
+                _db.Remove(recipe);
+                _db.SaveChanges();
+            }
         }
 
         public Recipe Get(int id)

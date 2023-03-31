@@ -2,6 +2,7 @@
 @page "/recipe/create"
 
 @using DataAccess.Models
+@using RecipeManager.Pages.Components;
 @using Services
 
 @inject IRecipeService RecipeService
@@ -31,7 +32,7 @@
                 <button type="submit" href="/recipes" class="btn btn-sm btn-primary" hidden="@(Id == null)"><i class="fas fa-save pr-2"></i>Save</button>
                 <button type="submit" class="btn btn-sm btn-success" hidden="@(Id != null)"><i class="fas fa-plus pr-2"></i>Create</button>
                 <a href="/recipes" class="btn btn-sm btn-secondary"><i class="fas fa-times pr-2"></i>Cancel</a>
-                <button type="button" class="btn btn-sm btn-danger pull-right" hidden="@(Id == null)"><i class="fas fa-trash pr-2"></i>Delete</button>
+                <button type="button" class="btn btn-sm btn-danger pull-right" hidden="@(Id == null)" @onclick="(async () => await ShowConfirmationModal())"><i class="fas fa-trash pr-2"></i>Delete</button>
             </div>
         </div>
         @if (Id != null)
@@ -49,6 +50,7 @@
     [Parameter]
     public int? Id { get; set; }
     public Recipe Recipe = new Recipe();
+    [CascadingParameter] IModalService Modal { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -79,4 +81,18 @@
             ToastService.ShowError("Something went wrong while saving your recipe");
         }
     }
- }
+    private async Task ShowConfirmationModal()
+    {
+        var parameters = new ModalParameters();
+        parameters.Add("RecipeId", Id);
+
+        var confirmationModal = Modal.Show<ConfirmationModal>("Delete recipe?", parameters);
+        var result = await confirmationModal.Result;
+
+        if (!result.Cancelled)
+        {
+            ToastService.ShowSuccess("Your recipe has been deleted!");
+            NavigationManager.NavigateTo($"recipes");
+        }
+    }
+}

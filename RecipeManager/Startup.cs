@@ -1,4 +1,5 @@
-﻿using Blazored.Toast;
+﻿using Blazored.Modal;
+using Blazored.Toast;
 using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Services;
@@ -24,6 +25,7 @@ namespace RecipeManager
             services.AddServerSideBlazor();
             services.AddScoped<IRecipeService, RecipeService>();
             services.AddBlazoredToast();
+            services.AddBlazoredModal();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

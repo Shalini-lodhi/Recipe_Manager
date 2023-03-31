@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "ldbE+OFLDDpNNU56zG0q70mp0m6077mCz3K3IijOW+UzByKvdyDX+KuKjuqLsLLsaSFXSLI0NcTGfxh23mjAgA==",
+  "dgSpecHash": "R5ctBeceF9dky1AOOzaINMyp7x0J4HfV70ayPIJd4pyvmsIHzZDEbO95ucw0KM5q0FlnuIGc5ipZNWdAGp6bDw==",
   "success": true,
   "projectFilePath": "C:\\Users\\X6SLODHI\\Documents\\Training_codes\\Blazor\\RecipeManager_BlazorServer\\RecipeManager\\RecipeManager.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\X6SLODHI\\.nuget\\packages\\blazored.modal\\7.1.0\\blazored.modal.7.1.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\blazored.toast\\4.1.0\\blazored.toast.4.1.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.aspnetcore.authorization\\6.0.12\\microsoft.aspnetcore.authorization.6.0.12.nupkg.sha512",
@@ -44,6 +45,7 @@
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.21.0\\microsoft.identitymodel.protocols.openidconnect.6.21.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.21.0\\microsoft.identitymodel.tokens.6.21.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.jsinterop\\6.0.12\\microsoft.jsinterop.6.0.12.nupkg.sha512",
+    "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.jsinterop.webassembly\\6.0.3\\microsoft.jsinterop.webassembly.6.0.3.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\X6SLODHI\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",

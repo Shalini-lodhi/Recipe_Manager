@@ -1,6 +1,8 @@
-﻿using DataAccess.Data;
+﻿using Blazored.Toast;
+using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using RecipeManager.Services;
+
 
 namespace RecipeManager
 {
@@ -21,6 +23,7 @@ namespace RecipeManager
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<IRecipeService, RecipeService>();
+            services.AddBlazoredToast();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +36,7 @@ namespace RecipeManager
             else
             {
                 app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -43,7 +47,6 @@ namespace RecipeManager
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapRazorPages();
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });

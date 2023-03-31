@@ -1,29 +1,139 @@
 
+
 # Recipe Manager
 Created a recipe manager web application that can be used as a starter template for some of our personal projects, or enhance our portfolio to increase your chances of getting into a better job!
 
 ## Retrieve Data using EntityFramework Core
-- Create a new Recipe Details Razor Component
-- Get a recipe by its ID(Recipe Service)
-- Show the Recipe Details on page load
-- Redirect to a recipe when seleted
+- Edit form 
+- Add EditForm
+-  Add EditForm Submission handler
+-  Setup Blazored Toast
+-  Setup Validation
 
-### 1. Create a new Recipe Details Razor Component
-
-```Pages/Recipe/RecipeDetails.razor```
+### 1. Edit form 
+[RecipeDetails.razor]
 ```c#
-@page "/recipe/{Id:int}"
+<EditForm Model="@Recipe" OnValidSubmit="@HandleOnValidSubmit" class="col-7 p-0">
+    <label>Created on: @Recipe.DateCreated</label> <br />
+    <label>Updated on: @Recipe.DateUpdated</label>
+</EditForm>
+```
+### 2. Add Edit form 
+```c#
+<div class="form-group">
+        <label for="title">Title</label>
+        <InputText id="title" @bind-Value="@Recipe.Title" class="form-control" placeholder="Green curry..." />
+        <ValidationMessage For="@(() => Recipe.Title)"/>
+    </div>
 
-@using DataAccess.Models
-@using Services
+    <div class="form-group">
+        <label for="description">Description</label>
+        <InputTextArea id="description" @bind-Value="@Recipe.Description" class="form-control" placeholder="Cook the potatoes in boiling water for about 10 mins..." row="5" />
+    </div>
+```
+### 3. Add Edit form Submission handler
 
-@inject IRecipeService RecipeService
+[RecipeDetails.razor]
+```c#
+<div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+</div>
+```
+### 4. Setup Blazored Toast
+-  package ```Blazored.Toast```
+[_Layout.cshtml]
+```html
+<link href="_content/Blazored.Toast/blazored-toast.min.css" rel="stylesheet" />
+```
+[MainLayout.razor]
+Adding Blazored Toasts in main layout's page.
+```c#
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+    <BlazoredToasts />
 
-<h3>@Recipe.Title</h3>
-<b>Description:</b><p>@Recipe.Description</p>
-<b>Date created:</b><p>@Recipe.DateCreated</p>
-<b>Date updated:</b><p>@Recipe.DateUpdated</p>
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+        </div>
 
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+```
+[_import.razor]
+```c#
+@using Blazored.Toast
+@using Blazored.Toast.Services
+```
+[Startup.cs]
+```c#
+public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddRazorPages();
+            services.AddServerSideBlazor();
+            services.AddScoped<IRecipeService, RecipeService>();
+            services.AddBlazoredToast();
+        }
+```
+[RecipeService.cs]
+```c#
+public Recipe Update(Recipe recipe)
+        {
+            var dbRecipe = _db.Recipes.Find(recipe.Id);
+
+            if (dbRecipe != null)
+            {
+                dbRecipe = recipe;
+                dbRecipe.DateUpdated = DateTime.Now;
+
+                _db.SaveChanges();
+            }
+            return dbRecipe;
+        }
+```
+
+### 5. Setup Validation
+[Recipe.cs]
+```c#
+[Required]
+        [StringLength(50, ErrorMessage = "The title is too long, try a shorter one (50 characters limit)")]
+        public string Title { get; set; }
+
+        [Required]
+        [StringLength(1000, ErrorMessage = "The description is too long, try a shorter one (1000 characters limit)")]
+```
+[RecipeDetails.razor]
+```html
+<EditForm Model="@Recipe" OnValidSubmit="@HandleOnValidSubmit" class="col-7 p-0">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="title">Title</label>
+        <InputText id="title" @bind-Value="@Recipe.Title" class="form-control" placeholder="Green curry..." />
+        <ValidationMessage For="@(() => Recipe.Title)"/>
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description</label>
+        <InputTextArea id="description" @bind-Value="@Recipe.Description" class="form-control" placeholder="Cook the potatoes in boiling water for about 10 mins..." row="5" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+    <hr />
+    <label>Created on: @Recipe.DateCreated</label> <br />
+    <label>Updated on: @Recipe.DateUpdated</label>
+</EditForm>
+```
+```c#
 @code {
     [Parameter]
     public int? Id { get; set; }
@@ -36,61 +146,18 @@ Created a recipe manager web application that can be used as a starter template 
             Recipe = RecipeService.Get(Id.Value);
         }
     }
-}
-```
-### 2. Geta Recipe By its Id(Recipe Service)
-```RecipeService.cs```
-```c#
- public Recipe Get(int id)
+
+    private void HandleOnValidSubmit()
+    {
+        try
         {
-            return _db.Recipes.Find(id);
+            RecipeService.Update(Recipe);
+            ToastService.ShowSuccess("Your recipe has been saved successfully");
         }
-```
-### 3. Show the Recipr Details on Page Load
-```RecipeDetails.razor```
-```c#
-@page "/recipe/{Id:int}"
-
-@using DataAccess.Models
-@using Services
-
-@inject IRecipeService RecipeService
-
-<h3>@Recipe.Title</h3>
-<b>Description:</b><p>@Recipe.Description</p>
-<b>Date created:</b><p>@Recipe.DateCreated</p>
-<b>Date updated:</b><p>@Recipe.DateUpdated</p>
-
-@code {
-    [Parameter]
-    public int? Id { get; set; }
-    public Recipe Recipe = new Recipe();
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (Id != null)
+        catch (Exception)
         {
-            Recipe = RecipeService.Get(Id.Value);
+            ToastService.ShowError("Something went wrong while saving your recipe");
         }
-    }
-}
-```
-### 4. Redirect to a recipe when selected
-```RecipeList.razor```
-```c#
-@inject IRecipeService RecipeService
-@inject NavigationManager NavigationManager
-@code {
-    List<Recipe> Recipes = new List<Recipe>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Recipes = RecipeService.List();
-    }
-
-    private void RedirectTo(int recipeId)
-    {
-        NavigationManager.NavigateTo($"/recipe/{recipeId}");
     }
 }
 ```

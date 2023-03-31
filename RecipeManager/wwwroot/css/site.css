@@ -62,3 +62,21 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+i {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.col-lg-12 {
+    border: solid 0px #6c757d;
+    padding: 10px;
+}
+
+.test.btn-toolbar {
+    display: block !important;
+}

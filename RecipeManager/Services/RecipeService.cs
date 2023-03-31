@@ -14,7 +14,13 @@ namespace RecipeManager.Services
 
         public Recipe Create(Recipe recipe)
         {
-            throw new NotImplementedException();
+            recipe.DateCreated = DateTime.Now;
+            recipe.DateUpdated = DateTime.Now;
+
+            var newRecipe = _db.Recipes.Add(recipe);
+            _db.SaveChanges();
+
+            return newRecipe.Entity;
         }
 
         public void Delete(int id)
@@ -29,12 +35,21 @@ namespace RecipeManager.Services
 
         public List<Recipe> List()
         {
-            return _db.Recipes.ToList();
+            return _db.Recipes.OrderByDescending(o => o.DateUpdated).ToList();
         }
 
         public Recipe Update(Recipe recipe)
         {
-            throw new NotImplementedException();
+            var dbRecipe = _db.Recipes.Find(recipe.Id);
+
+            if (dbRecipe != null)
+            {
+                dbRecipe = recipe;
+                dbRecipe.DateUpdated = DateTime.Now;
+
+                _db.SaveChanges();
+            }
+            return dbRecipe;
         }
     }
 }
